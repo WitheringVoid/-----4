@@ -1,5 +1,6 @@
 ﻿#include "Objects.h"
 #include <Windows.h>
+#include <cwchar>   // swprintf / wcslen (без этого заголовка MSVC не видит swprintf)
 
 // ------------------------------ Location / Point ----------------------------
 

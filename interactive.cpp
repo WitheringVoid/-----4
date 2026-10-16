@@ -13,7 +13,10 @@ interactionType interactive::interactionMatrix[OBJ_LENGTH_COUNTER][INTER_LENGTH_
 };
 
 interactionType interactive::getInteractionType(objectType source, objectType target) {
+    // Исправление: оба индекса — тип объекта (objectType), поэтому верхняя
+    // граница для обоих — OBJ_LENGTH_COUNTER (раньше для target ошибочно
+    // использовался размер INTER_LENGTH_COUNTER).
     if (source < 0 || source >= OBJ_LENGTH_COUNTER) return INTERACTION_ERROR;
-    if (target < 0 || target >= INTER_LENGTH_COUNTER) return INTERACTION_ERROR;
+    if (target < 0 || target >= OBJ_LENGTH_COUNTER) return INTERACTION_ERROR;
     return interactionMatrix[source][target];
 }
