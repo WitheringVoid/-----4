@@ -1,7 +1,9 @@
-#pragma once
+﻿#pragma once
 #ifndef ENUMS_H
 #define ENUMS_H
 
+// Типы объектов сцены (используются, в частности, в матрице взаимодействий
+// и при проверке коллизий: блокируются только конусы, остановка — «проезжаема»)
 enum objectType {
     OBJ_BUS,
     OBJ_MINIBUS,
@@ -12,6 +14,7 @@ enum objectType {
     OBJ_LENGTH_COUNTER
 };
 
+// Результаты взаимодействия объектов
 enum interactionType {
     NO_INTERACTION,
     COLLISION_DETECTED,
@@ -23,6 +26,7 @@ enum interactionType {
     INTER_LENGTH_COUNTER
 };
 
+// Направления движения автобуса
 enum movementDirection {
 	MOVE_UP,
 	MOVE_DOWN,
