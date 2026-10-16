@@ -4,6 +4,7 @@
 
 #include "interactive.h"
 #include <Windows.h>
+#include <cwchar>   // swprintf / wcslen — явно подключаем, чтобы не зависеть от порядка include
 
 // Идентификаторы пунктов меню «Выбор» (тип автобуса)
 #define IDM_BUS            40001
@@ -131,14 +132,17 @@ public:
 	// не смог бы «заехать» на остановку для посадки/высадки пассажиров.
 	bool willCollide(obstacle* obs, movementDirection dir, objectType type);
 
+	// Общий вывод табло «пассажиры/места» — уменьшает дублирование кода
+	// в наследниках (наследование, этап 1).
+	// ВАЖНО: метод должен быть protected, а не private: наследники
+	// (miniBus, doubleDecker и пр.) вызывают его из своих draw().
+	// К приватным членам базового класса у потомков доступа нет —
+	// компилятор выдал бы ошибку C2248 («невозможно обратиться к private члену»).
+	void drawPassengerSign(HDC hdc);
+
 protected:
 	// Вспомогательный метод взаимодействия с остановкой (виртуальный для переопределения)
 	virtual interactionType interactWithStop(busStop* stop, WPARAM wParam);
-
-private:
-	// Общий вывод табло «пассажиры/места» — уменьшает дублирование кода
-	// в наследниках (наследование, этап 1).
-	void drawPassengerSign(HDC hdc);
 };
 
 class miniBus : public Bus {
